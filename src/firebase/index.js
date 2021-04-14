@@ -1,7 +1,8 @@
-import firebase from 'firebase/app';
+import firebase from 'firebase/app'
 
-import 'firebase/storage';
 import 'firebase/firestore';
+import 'firebase/auth';
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDVvS8q-GuNelSuQ-d9FX1cFtf2pDBN5cI",
@@ -17,6 +18,8 @@ firebase.initializeApp(firebaseConfig);
 
 const galleryFirestore = firebase.firestore();
 const galleryStorage = firebase.storage();
+const galleryAuth = firebase.auth();
+
 const firebaseTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export { galleryFirestore, galleryStorage, firebaseTimestamp };
+export { galleryFirestore, galleryStorage, galleryAuth, firebaseTimestamp };

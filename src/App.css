@@ -1,0 +1,17 @@
+.img-wrap{
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  /* padding controls height, will always be perfectly square regardless of width */
+  position: relative;
+  opacity: 0.8;
+}
+.img-wrap img{
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  object-fit: cover;
+  object-position: right;
+  top: 0;
+  left: 0;
+}
