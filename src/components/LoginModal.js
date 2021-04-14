@@ -11,6 +11,7 @@ const LoginModal = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setError] = useState('');
 
   const [
     createUserWithEmailAndPassword,
@@ -31,9 +32,19 @@ const LoginModal = () => {
     }
   }, [user])
 
+  console.log(error)
+
   useEffect(() => {
     if (error?.code === 'auth/email-already-in-use') {
-      auth.signInWithEmailAndPassword(email, password).then(user => console.log(user))
+      auth.signInWithEmailAndPassword(email, password)
+        .then(user => {
+          console.log(user)
+          setError('')
+        })
+        .catch(err => {
+          console.log(err)
+          setError('The email and password do not match');
+        });
     }
   }, [email, error, password]);
 
@@ -51,6 +62,7 @@ const LoginModal = () => {
             }} className="text-gray-300 cursor-pointer" size={36} />
           </div>
           <hr className="border-t-2 border-gray-400 border-opacity-70" />
+          {loginError && <span>{loginError}</span>}
           <form onSubmit={(e) => {
             e.preventDefault();
             createUserWithEmailAndPassword(email, password);

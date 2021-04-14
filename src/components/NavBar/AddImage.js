@@ -35,7 +35,7 @@ const AddImage = () => {
 
   return isPreviewOpen && (
     <div className="fixed z-50 top-0 left-0 overflow-hidden bg-black bg-opacity-60 w-screen h-screen flex flex-row justify-center items-center" >
-      <div className="w-full max-w-lg text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700">
+      <div className="w-full max-w-lg text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700 overflow-y-scroll" style={{maxHeight: '75vh'}}>
         <div className="flex flex-row items-center justify-between">
           <AiFillCloseCircle className="invisible" size={36} />
           <h3 className="text-2xl font-medium">Create Post</h3>

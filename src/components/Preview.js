@@ -28,8 +28,15 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
         className="flex flex-row justify-center items-center m-auto"
+
       >
-        <div className="w-full max-w-lg text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700">
+        <div
+          style={{
+            minWidth: '60%',
+            minHeight: '80%',
+          }}
+          className="w-full max-w-lg text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700"
+        >
           <div className="text-left flex flex-col gap-2 items-center">
             <h4 className="text-xl font-semibold text-gray-50 w-full">{user}</h4>
             <img className="min-w-full rounded-md shadow-xl object-cover overflow-y-scroll" style={{
