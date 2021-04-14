@@ -31,7 +31,7 @@ function App() {
 }
 
 const Post = ({ post, onClick }) => (
-  <motion.div className="img-wrap cursor-pointer rounded shadow" key={post.id}
+  <motion.div className="img-wrap cursor-pointer rounded shadow opacity-60" key={post.id}
     layout
     whileHover={{ opacity: 1 }}
     onClick={onClick}
