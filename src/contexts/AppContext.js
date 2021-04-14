@@ -27,6 +27,7 @@ export const AppProvider = ({ children }) => {
       toggleLoginModal,
       isLoginModalOpen,
       isAuthenticated: !!user,
+      user,
     }}
     >
       {children}

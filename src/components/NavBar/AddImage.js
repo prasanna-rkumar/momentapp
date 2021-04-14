@@ -7,7 +7,7 @@ import useStorage from "../../firebase/hooks/useStorage";
 import ProgressBar from "./ProgressBar";
 
 const AddImage = () => {
-  const { isPreviewOpen, togglePreviewModal } = useContext(AppContext);
+  const { isPreviewOpen, togglePreviewModal, user } = useContext(AppContext);
   const { progress, createPostInFirebase } = useStorage();
 
   const [caption, setCaption] = useState("");
@@ -46,8 +46,8 @@ const AddImage = () => {
         <hr className="border-t-2 border-gray-400 border-opacity-70" />
         {error && <span className="text-red-600 font-medium text-xl">{error}</span>}
         <div className="text-left flex flex-col gap-2 items-center">
-          <h4 className="font-normal text-gray-200 w-full">Prasanna Kumar</h4>
-          <textarea value={caption} onChange={(e) => setCaption(e.target.value)} className="w-full bg-transparent resize-none p-2" placeholder="What's on your mind Prasanna?" />
+          <h4 className="font-normal text-gray-200 w-full">{user.email.split("@")[0]}</h4>
+          <textarea value={caption} onChange={(e) => setCaption(e.target.value)} className="w-full bg-transparent resize-none p-2" placeholder={`What's on your mind ${user.email.split("@")[0]}? `} />
           {file && <img className="min-w-full rounded-md shadow-xl object-cover overflow-y-scroll" style={{
             height: '60vh',
           }} alt="preview" src={URL.createObjectURL(file)} />}
