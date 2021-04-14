@@ -25,7 +25,10 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
       animate={{ opacity: 1 }}
     >
       <motion.div
-        className="clickable max-w-lg w-full m-auto text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700"
+        className="clickable max-w-3xl w-auto m-auto text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700"
+        style={{
+          maxHeight: '85%',
+        }}
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
       >
