@@ -14,6 +14,39 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
   }, [selectedPost.user])
 
   const handleClick = (e) => {
+    if (e.target.classList.contains('clickable')) {
+      setSelectedPost(null);
+    }
+  }
+
+  return (
+    <motion.div className="backdrop clickable" onClick={handleClick}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <motion.div
+        className="clickable max-w-lg w-full m-auto text-white flex flex-col gap-3 p-2 rounded-md bg-gray-700"
+        initial={{ y: "-100vh" }}
+        animate={{ y: 0 }}
+      >
+        <h4>{user}</h4>
+        <img src={selectedPost.url} alt="enlarged pic" />
+        <div className="w-full">
+          <span className="font-bold">{user}</span>
+          {'  '}
+          {selectedPost.caption}
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+
+  /* const [user, setUser] = useState("");
+
+  useEffect(() => {
+    collectionRef.doc(selectedPost.user).get().then((doc) => setUser(doc.data().email.split("@")[0]));
+  }, [selectedPost.user])
+
+  const handleClick = (e) => {
     if (e.target.classList.contains('preview-backdrop')) {
       setSelectedPost(null);
     }
@@ -39,9 +72,7 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
         >
           <div className="text-left flex flex-col gap-2 items-center">
             <h4 className="text-xl font-semibold text-gray-50 w-full">{user}</h4>
-            <img className="min-w-full rounded-md shadow-xl object-cover overflow-y-scroll" style={{
-              height: '60vh',
-            }} alt="preview" src={selectedPost.url} />
+            <img className="min-w-full rounded-md shadow-xl object-cover overflow-y-scroll" alt="preview" src={selectedPost.url} />
             <div className="w-full">
               <span className="font-bold">{user}</span>
               {'  '}
@@ -50,16 +81,8 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
           </div>
         </div>
       </motion.div>
-      {/* <motion.img style={{
-        maxWidth: '60%',
-        maxHeight: '80%',
-        margin: 'auto',
-      }} className="rounded-xl block my-16 mx-auto shadow-lg border-4 border-white" src={selectedPost.url} alt="enlarged pic"
-        initial={{ y: "-100vh" }}
-        animate={{ y: 0 }}
-      /> */}
     </motion.div>
-  )
+  ) */
 }
 
 export default Preview;

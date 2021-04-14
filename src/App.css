@@ -1,4 +1,4 @@
-.img-wrap{
+.img-wrap {
   overflow: hidden;
   height: 0;
   padding: 50% 0;
@@ -6,12 +6,24 @@
   position: relative;
   opacity: 0.8;
 }
-.img-wrap img{
-  min-width: 100%;
-  min-height: 100%;
-  position: absolute;
-  object-fit: cover;
-  object-position: right;
+
+.backdrop {
+  opacity: 1;
+  position: fixed;
   top: 0;
   left: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: #0006;
+  padding: 0 10%;
+}
+
+.backdrop img {
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
 }

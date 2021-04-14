@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Button from "./Button";
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { firebaseTimestamp, galleryAuth as auth, galleryFirestore } from '../firebase'
 import Loading from "./Loading";
 
@@ -11,42 +11,32 @@ const LoginModal = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setError] = useState('');
 
   const [
-    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
     user,
     loading,
     error,
-  ] = useCreateUserWithEmailAndPassword(auth);
-
-  useEffect(() => {
-    if (user?.additionalUserInfo?.isNewUser) {
-      const collectionRef = galleryFirestore.collection('users');
-      const createdAt = firebaseTimestamp();
-      collectionRef.doc(user.user.uid).set({
-        email: user.user.email,
-        createdAt,
-        updatedAt: createdAt,
-      }).catch(err => console.log(err))
-    }
-  }, [user])
+  ] = useSignInWithEmailAndPassword(auth);
 
   console.log(error)
 
   useEffect(() => {
-    if (error?.code === 'auth/email-already-in-use') {
-      auth.signInWithEmailAndPassword(email, password)
-        .then(user => {
-          console.log(user)
-          setError('')
+    if (error?.code === 'auth/user-not-found') {
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(({ additionalUserInfo, user }) => {
+          if (additionalUserInfo.isNewUser) {
+            const createdAt = firebaseTimestamp();
+            galleryFirestore.collection('users').doc(user.uid).set({
+              email: user.email,
+              createdAt,
+              updatedAt: createdAt
+            })
+          }
         })
-        .catch(err => {
-          console.log(err)
-          setError('The email and password do not match');
-        });
+        .catch((err => console.log(err)))
     }
-  }, [email, error, password]);
+  }, [user, error, loading, email, password])
 
   return isLoginModalOpen && (
     <div className="fixed z-50 top-0 left-0 overflow-hidden bg-black bg-opacity-60 w-screen h-screen flex flex-row justify-center items-center" >
@@ -62,24 +52,19 @@ const LoginModal = () => {
             }} className="text-gray-300 cursor-pointer" size={36} />
           </div>
           <hr className="border-t-2 border-gray-400 border-opacity-70" />
-          {loginError && <span>{loginError}</span>}
+          {error && <span>{error.message}</span>}
           <form onSubmit={(e) => {
             e.preventDefault();
-            createUserWithEmailAndPassword(email, password);
+            signInWithEmailAndPassword(email, password);
           }} className="text-left flex flex-col gap-2 items-center">
             <TextFormField type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <TextFormField type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <div className="h-1" />
             <Button onClick={() => { }} isDisabled={email === '' || password === ''}>Login</Button>
           </form>
-          <Button isSecondary onClick={() => {
-            createUserWithEmailAndPassword("tester@gmail.com", "password");
-          }} isDisabled={email === '' || password === ''}>Login with dummy account</Button>
-          {/* <div className="flex flex-row justify-between gap-8 items-center px-8">
-            <div className="h-px w-full bg-gray-500" />
-            <span className="text-white text-opacity-60">OR</span>
-            <div className="h-px w-full bg-gray-500" />
-          </div> */}
+          <Button onClick={() => {
+            signInWithEmailAndPassword('test@gmail.com', 'password');
+          }} >Login as test user</Button>
         </div>
       )}
     </div>

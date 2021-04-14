@@ -36,7 +36,7 @@ const Post = ({ post, onClick }) => (
     whileHover={{ opacity: 1 }}
     onClick={onClick}
   >
-    <motion.img src={post.url} alt="uploaded pic"
+    <motion.img src={post.url} alt="uploaded pic" className="object-cover object-center absolute top-0 left-0 min-h-full min-w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1 }}
