@@ -91,7 +91,7 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
             }}>
               {isLiked ? <AiFillHeart color="#ED4956" size={28} /> : <AiOutlineHeart size={28} />}
             </button>
-            {likesCount > 0 ? <p>{likesCount} likes</p> : null}
+            {likesCount > 0 ? <p>{likesCount} like{likesCount > 1 && 's'}</p> : null}
             <div className="w-full">
               <span className="font-bold">{user}</span>
               {'  '}
@@ -99,23 +99,24 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
             </div>
             <p style={{ fontSize: 10 }} className="text-gray-400 tracking-wide font-medium uppercase">{js_ago(selectedPost.createdAt.seconds)}</p>
           </div>
-          <div className="border-t-2 border-gray-400 pt-1.5 pb-0.5 flex justify-between items-center">
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            if (!isAuthenticated) {
+              toggleLoginModal();
+              return;
+            }
+            const commenterDocRef = galleryFirestore.collection('users').doc(galleryAuth.currentUser.uid)
+            galleryFirestore.collection('images').doc(selectedPost.id).collection('comments').add({
+              body: comment,
+              user: commenterDocRef,
+              createdAt: firebaseTimestamp(),
+            }).then(() => setComment(''))
+          }} className="border-t-2 border-gray-400 pt-1.5 pb-0.5 flex justify-between items-center">
             <input value={comment} onChange={(e) => setComment(e.target.value)} className="w-full pl-2 h-8 bg-transparent outline-none" type="text" placeholder="Add a comment..." />
-            <button disabled={comment === ''} className="disabled:opacity-30 mr-2 disabled:cursor-not-allowed" onClick={() => {
-              if (!isAuthenticated) {
-                toggleLoginModal();
-                return;
-              }
-              const commenterDocRef = galleryFirestore.collection('users').doc(galleryAuth.currentUser.uid)
-              galleryFirestore.collection('images').doc(selectedPost.id).collection('comments').add({
-                body: comment,
-                user: commenterDocRef,
-                createdAt: firebaseTimestamp(),
-              }).then(() => setComment(''))
-            }}>
+            <button disabled={comment === ''} className="disabled:opacity-30 mr-2 disabled:cursor-not-allowed">
               <IoIosSend size={26} />
             </button>
-          </div>
+          </form>
         </div>
         <Comments postId={selectedPost.id} />
       </motion.div>
