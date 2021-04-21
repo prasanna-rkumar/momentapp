@@ -6,7 +6,7 @@ const Comments = ({ postId }) => {
   return <div className="bg-gray-700">
     {
       comments.map(comment => (
-        <CommentTile comment={comment} />
+        <CommentTile key={comment.id} comment={comment} />
       ))
     }
   </div>;
