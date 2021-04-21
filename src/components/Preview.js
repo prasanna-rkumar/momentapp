@@ -102,7 +102,10 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
           <div className="border-t-2 border-gray-400 pt-1.5 pb-0.5 flex justify-between items-center">
             <input value={comment} onChange={(e) => setComment(e.target.value)} className="w-full pl-2 h-8 bg-transparent outline-none" type="text" placeholder="Add a comment..." />
             <button disabled={comment === ''} className="disabled:opacity-30 mr-2 disabled:cursor-not-allowed" onClick={() => {
-              if (!isAuthenticated) return;
+              if (!isAuthenticated) {
+                toggleLoginModal();
+                return;
+              }
               const commenterDocRef = galleryFirestore.collection('users').doc(galleryAuth.currentUser.uid)
               galleryFirestore.collection('images').doc(selectedPost.id).collection('comments').add({
                 body: comment,
