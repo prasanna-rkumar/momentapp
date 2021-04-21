@@ -7,6 +7,7 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isPreviewOpen, setPreviewOpen] = useState(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isProfilePage, setProfilePage] = useState(false);
   const [user] = useAuthState(auth);
 
   useEffect(() => {
@@ -24,6 +25,8 @@ export const AppProvider = ({ children }) => {
       isPreviewOpen,
       toggleLoginModal,
       isLoginModalOpen,
+      isProfilePage,
+      setProfilePage,
       isAuthenticated: !!user,
       user,
     }}

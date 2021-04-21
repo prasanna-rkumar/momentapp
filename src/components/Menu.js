@@ -42,7 +42,7 @@ const Menu = ({ title, menuItems }) => {
         <div>
           <div className="origin-top-right absolute right-0 w-48 py-2 mt-1 bg-gray-200 rounded shadow-md">
             {menuItems.map((menuItem, index) => (
-              <div key={index} className="cursor-pointer text-gray-800 px-4 py-2 hover:bg-blue-500 hover:text-blue-50">
+              <div key={index} className="cursor-pointer text-gray-800 h-8 hover:bg-blue-500 hover:text-blue-50">
                 {menuItem}
               </div>
             ))}

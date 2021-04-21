@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
-import { galleryFirestore } from '../index'
+import { galleryAuth, galleryFirestore } from '../index'
 
-const useFirestore = (collection) => {
+const useFirestore = (isProfile) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    const unsub = galleryFirestore.collection(collection)
+    let collectionRef = galleryFirestore.collection('images');
+    if (isProfile) {
+      collectionRef = collectionRef.where('user', '==', galleryAuth.currentUser.uid);
+    }
+    const unsub = collectionRef
       .orderBy('createdAt', 'desc')
       .onSnapshot((snap) => {
         let documents = [];
+        console.log(snap.docs.length);
         snap.forEach(doc => {
           let data = doc.data();
           documents.push({ ...data, id: doc.id });
@@ -17,7 +22,7 @@ const useFirestore = (collection) => {
       });
 
     return () => unsub();
-  }, [collection]);
+  }, [isProfile]);
 
   return { docs };
 }
