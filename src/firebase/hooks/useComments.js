@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { galleryFirestore } from '../index'
 
-const useFirestore = (collection) => {
+const useComments = (postId) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    const unsub = galleryFirestore.collection(collection)
+    const unsub = galleryFirestore.collection('images')
+      .doc(postId)
+      .collection('comments')
       .orderBy('createdAt', 'desc')
       .onSnapshot((snap) => {
         let documents = [];
@@ -17,9 +19,9 @@ const useFirestore = (collection) => {
       });
 
     return () => unsub();
-  }, [collection]);
+  }, [postId]);
 
-  return { docs };
+  return { comments: docs };
 }
 
-export default useFirestore;
+export default useComments;

@@ -18,9 +18,11 @@ function App() {
         <AddImage />
         <main className="mt-16 mx-auto max-w-5xl">
           <div className="col-span-6 p-4 grid grid-cols-2 md:grid-cols-3 gap-2" >
-            {docs && docs.map((doc) => (
-              <Post key={doc.url} post={doc} onClick={() => setSelectedPost(doc)} />
-            ))}
+            {docs && docs.map((doc) => {
+              return (
+                <Post key={doc.url} post={doc} onClick={() => setSelectedPost(doc)} />
+              );
+            })}
           </div>
           <LoginModal />
           {selectedPost && <Preview selectedPost={selectedPost} setSelectedPost={setSelectedPost} />}

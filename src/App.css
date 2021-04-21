@@ -21,7 +21,8 @@
 }
 
 .preview-img {
-  max-height: 85%;
+  max-height: 70%;
+  object-fit: cover;
   max-width: 100%;
   margin: 0;
 }
