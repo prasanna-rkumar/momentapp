@@ -21,5 +21,7 @@ const galleryStorage = firebase.storage();
 const galleryAuth = firebase.auth();
 
 const firebaseTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+const firestoreArrayUnion = firebase.firestore.FieldValue.arrayUnion;
+const firestoreArrayRemove = firebase.firestore.FieldValue.arrayRemove;
 
-export { galleryFirestore, galleryStorage, galleryAuth, firebaseTimestamp };
+export { galleryFirestore, galleryStorage, galleryAuth, firebaseTimestamp, firestoreArrayUnion, firestoreArrayRemove };

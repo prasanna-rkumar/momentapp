@@ -19,8 +19,6 @@ const LoginModal = () => {
     error,
   ] = useSignInWithEmailAndPassword(auth);
 
-  console.log(error)
-
   useEffect(() => {
     if (error?.code === 'auth/user-not-found') {
       auth.createUserWithEmailAndPassword(email, password)

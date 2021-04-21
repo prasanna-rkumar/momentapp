@@ -9,8 +9,6 @@ export const AppProvider = ({ children }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [user] = useAuthState(auth);
 
-
-
   useEffect(() => {
     if (user) {
       setLoginModalOpen(false);
