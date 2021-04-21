@@ -10,7 +10,7 @@ const NavBar = () => {
   return (
     <nav className="fixed z-40 top-0 left-0  w-full h-14 bg-gray-700 border-b-2 border-gray-500" >
       <div className="flex text-white flex-row justify-between items-center px-4 h-full max-w-5xl m-auto" >
-        <h1 onClick={(e) => setProfilePage(false)} className="text-2xl transition-transform font-semibold text-white cursor-pointer transform hover:-translate-y-1">Instabook</h1>
+        <h1 onClick={(e) => setProfilePage(false)} className="text-2xl transition-transform font-semibold text-white cursor-pointer transform hover:-translate-y-1">Moment App</h1>
         <div className="flex flex-row items-center gap-4">
           <AnchorButton onClick={() => {
             if (!isAuthenticated) toggleLoginModal();
