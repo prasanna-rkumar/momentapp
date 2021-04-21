@@ -61,7 +61,7 @@ const LoginModal = () => {
             <Button onClick={() => { }} isDisabled={email === '' || password === ''}>Login</Button>
           </form>
           <Button onClick={() => {
-            signInWithEmailAndPassword('test@gmail.com', 'password');
+            signInWithEmailAndPassword('tester@gmail.com', 'password');
           }} >Login as test user</Button>
         </div>
       )}

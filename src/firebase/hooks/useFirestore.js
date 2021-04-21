@@ -13,7 +13,6 @@ const useFirestore = (isProfile) => {
       .orderBy('createdAt', 'desc')
       .onSnapshot((snap) => {
         let documents = [];
-        console.log(snap.docs.length);
         snap.forEach(doc => {
           let data = doc.data();
           documents.push({ ...data, id: doc.id });

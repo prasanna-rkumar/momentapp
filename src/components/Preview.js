@@ -25,10 +25,14 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
       .collection('images')
       .doc(selectedPost.id)
       .onSnapshot((snapshot) => {
+        if (snapshot.data() === undefined) {
+          setSelectedPost(null);
+          return;
+        }
         setLikesCount(snapshot.data()?.reactors?.length)
       });
     return () => unsub();
-  }, [selectedPost.id])
+  }, [selectedPost.id, setSelectedPost])
 
   // build username from user-email
   useEffect(() => {
