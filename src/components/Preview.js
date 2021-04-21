@@ -2,10 +2,12 @@ import { motion } from 'framer-motion';
 import { firebaseTimestamp, firestoreArrayRemove, firestoreArrayUnion, galleryAuth, galleryFirestore } from '../firebase';
 import { useEffect, useState, useContext } from 'react';
 import js_ago from 'js-ago';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart, AiFillDelete } from 'react-icons/ai'
 import { IoIosSend } from 'react-icons/io';
+import { FiMoreVertical } from 'react-icons/fi';
 import { AppContext } from '../contexts/AppContext';
 import Comments from './Comments';
+import Menu from './Menu';
 
 const collectionRef = galleryFirestore.collection('users');
 
@@ -23,7 +25,7 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
       .collection('images')
       .doc(selectedPost.id)
       .onSnapshot((snapshot) => {
-        setLikesCount(snapshot.data().reactors?.length)
+        setLikesCount(snapshot.data()?.reactors?.length)
       });
     return () => unsub();
   }, [selectedPost.id])
@@ -64,9 +66,29 @@ const Preview = ({ setSelectedPost, selectedPost }) => {
         <div style={{
           zIndex: -1
         }} className="flex flex-col gap-3">
-          <div className="flex justify-start items-center m-0 gap-2">
-            <img className="rounded-full" width={42} height={42} src={`https://ui-avatars.com/api/?name=${user}&background=random`} alt="name avatar" />
-            <h4 className="font-semibold text-lg">{user}</h4>
+          <div className="flex items-center justify-between">
+            <div className="flex justify-start items-center m-0 gap-2">
+              <img className="rounded-full" width={42} height={42} src={`https://ui-avatars.com/api/?name=${user}&background=random`} alt="name avatar" />
+              <h4 className="font-semibold text-lg">{user}</h4>
+            </div>
+            {
+              (selectedPost.user === galleryAuth.currentUser?.uid)
+              && (
+                <Menu
+                  title={<FiMoreVertical size={28} />}
+                  menuItems={[
+                    (
+                      <button className="w-full" onClick={() => {
+                        if (selectedPost.user !== galleryAuth.currentUser.uid) return;
+                        galleryFirestore.collection('images').doc(selectedPost.id).delete().then(() => setSelectedPost(null))
+                      }}>
+                        <AiFillDelete className="inline" size={22} /> Delete post
+                      </button>
+                    ),
+                  ]}
+                />
+              )
+            }
           </div>
           <img className="preview-img" src={selectedPost.url} alt="enlarged pic" />
           <div>
