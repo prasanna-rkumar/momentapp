@@ -5,13 +5,13 @@ import 'firebase/auth';
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDVvS8q-GuNelSuQ-d9FX1cFtf2pDBN5cI",
-  authDomain: "gallery-cb121.firebaseapp.com",
-  projectId: "gallery-cb121",
-  storageBucket: "gallery-cb121.appspot.com",
-  messagingSenderId: "1007200944555",
-  appId: "1:1007200944555:web:c96916d6bf140be70052ee",
-  measurementId: "G-WHEHERKPXJ"
+  apiKey: process.env.REACT_APP_FB_API_KEY,
+  authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FB_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FB_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FB_APP_ID,
+  measurementId: process.env.REACT_APP_FB_MEASUREMENT_ID
 };
 
 firebase.initializeApp(firebaseConfig);
