@@ -28,7 +28,10 @@ const NavBar = () => {
                     </AnchorButton>
                   ),
                   (
-                    <AnchorButton onClick={() => galleryAuth.signOut()}>
+                    <AnchorButton onClick={() => {
+                      galleryAuth.signOut();
+                      setProfilePage(false);
+                    }}>
                       Logout
                     </AnchorButton>
                   ),
