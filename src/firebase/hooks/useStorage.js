@@ -10,7 +10,7 @@ const useStorage = () => {
 
   const createPostInFirebase = (file, caption) => {
     if (!file) return;
-    const storageRef = galleryStorage.ref(file.name);
+    const storageRef = galleryStorage.ref(file.name + (Date.now().toString()));
     const collectionRef = galleryFirestore.collection('images');
 
     storageRef.put(file).on('state_changed', (snap) => {
