@@ -6,17 +6,22 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Getting Started
 
-1. Create a firebase app with authentication, storage and firestore.
+1. Clone the app
+```bash
+git clone https://github.com/prasanna-rkumar/momentapp
+```
 
-2. Copy the `.env.example` file to a `.env.local` file and fill in the environment variables of your Firebase app.
+2. Create a firebase app with authentication, storage and firestore.
 
-3. Install dependencies
+3. Copy the `.env.example` file to a `.env.local` file and fill in the environment variables of your Firebase app.
+
+4. Install dependencies
 
    ```bash
    npm i
    ```
 
-3. Start it up
+5. Start it up
 
    ```bash
    npm start
