@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/051e212a-d76f-4b9d-9daa-19a24da0166a/deploy-status)](https://app.netlify.com/sites/momentapp/deploys)
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ### Getting Started
 
 1. Create a firebase app with authentication, storage and firestore.
