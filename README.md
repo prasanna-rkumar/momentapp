@@ -2,19 +2,26 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/051e212a-d76f-4b9d-9daa-19a24da0166a/deploy-status)](https://app.netlify.com/sites/momentapp/deploys)
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 ### Getting Started
 
-1. Create a firebase app with authentication, storage and firestore.
+1. Clone the app
+```bash
+git clone https://github.com/prasanna-rkumar/momentapp
+```
 
-2. Copy the `.env.example` file to a `.env.local` file and fill in the environment variables of your Firebase app.
+2. Create a firebase app with authentication, storage and firestore.
 
-3. Install dependencies
+3. Copy the `.env.example` file to a `.env.local` file and fill in the environment variables of your Firebase app.
+
+4. Install dependencies
 
    ```bash
    npm i
    ```
 
-3. Start it up
+5. Start it up
 
    ```bash
    npm start
